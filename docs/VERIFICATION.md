@@ -58,3 +58,9 @@ GitHub Actions deployment `42757919752` succeeded, followed by successful build/
 The live site was opened in Edge. The exact requested subtitle and bottom dedication were verified. Loading the Ozgur Ozer reference post from the deployed origin succeeded, and the deployed worker exported/downloaded the complete 46.5-second MP4 (6,559,030 bytes). The output is H.264 at 1194×1376 and correctly silent, matching the source's lack of an audio track. This verifies the production worker, post-provider CORS, direct media retrieval, frame capture, and download path together.
 
 Release scope is complete. Remaining compatibility limits are the documented desktop-first video support, two-minute/100 MiB input guardrails, and unverified standalone Chrome/mobile coverage. The app continues to depend on FxTwitter and X CDN availability. The private project board records the public app, repository, Codex attribution, and validation results.
+
+## Stable v1.0.0 release — November 10, 2026
+
+The owner approved the XFrame Downloader logo, rebrand, and site themes. The rebrand commit `7da44dd` passed 64 tests, TypeScript, and the production build; GitHub Actions build and deploy run [42911635431](https://github.com/ichigoteguz/PostFrame/actions/runs/42911635431) succeeded. Live checks verified the XFrame Downloader title, light/dark logo assets, and site-theme selector. Local desktop/mobile checks verified both interface themes, persisted Dark after reload, and a successful sample PNG export. Site and export themes remain independent.
+
+Version 1.0.0 is the first stable release, with the supported scope and compatibility limits recorded in [release notes](RELEASE_NOTES.md). The page dedication remains; it is absent from the README. The repository and deployed path remain PostFrame.

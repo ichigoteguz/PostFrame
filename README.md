@@ -1,5 +1,7 @@
 # XFrame Downloader
 
+**Stable release: [v1.0.0](https://github.com/ichigoteguz/PostFrame/releases/tag/v1.0.0).**
+
 Keep the whole post. Export public X/Twitter posts as images, or download a video playing inside its original post frame.
 
 For that one friend who doesn't want to create a Twitter account, so sharing memes becomes more difficult than it has to be.
@@ -51,7 +53,7 @@ Only public posts are supported. Deleted, protected, restricted, external-player
 
 ## Deployment
 
-The GitHub Actions workflow tests and builds pushes and pull requests. Its deploy job intentionally runs only for a public repository, so private development does not publish the app. When release checks are complete, make the repository public, set Pages' source to GitHub Actions, and dispatch the workflow. `vite.config.ts` uses `/PostFrame/`; change `base` if the repository path changes. No runtime API tokens or build secrets are required. Worker and app assets are bundled and served from the same site.
+The public repository deploys to GitHub Pages through GitHub Actions. The workflow tests and builds pushes and pull requests, then deploys successful pushes to `main` (or manual workflow runs). Pull requests do not deploy. Its deploy job runs only for a public repository. `vite.config.ts` uses `/PostFrame/`; change `base` if the repository path changes. No runtime API tokens or build secrets are required. Worker and app assets are bundled and served from the same site.
 
 The repository is public and the app is hosted on GitHub Pages. The actual workflow is in `.github/workflows/pages.yml`, with a reference copy under `docs/`.
 
