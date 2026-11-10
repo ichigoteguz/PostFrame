@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
-import { assertFrame, assertSourceSize, selectVideoFormat } from './video';
+import { describe, expect, it, vi, afterEach } from 'vitest';
+import { assertFrame, assertSourceSize, selectVideoFormat, fetchVideo } from './video';
 import { LIMITS, type PostMedia } from './types';
 
 const media: PostMedia = { id: '1', type: 'video', url: '', thumbnail: '', width: 1080, height: 1920, formats: [
@@ -8,6 +8,14 @@ const media: PostMedia = { id: '1', type: 'video', url: '', thumbnail: '', width
   { url: 'https://video.twimg.com/x/vid/avc1/360x640/low.mp4', bitrate: 500_000 },
   { url: 'https://video.twimg.com/x/master.m3u8', type: 'application/x-mpegURL' },
 ] };
+afterEach(() => vi.unstubAllGlobals());
+it('downloads without a referrer so X does not reject an otherwise CORS-enabled request', async () => {
+  vi.stubGlobal('location', { href: 'https://ichigoteguz.github.io/PostFrame/' });
+  const fetchMock = vi.fn().mockResolvedValue(new Response(new Uint8Array([1, 2, 3]), { headers: { 'content-type': 'video/mp4' } }));
+  vi.stubGlobal('fetch', fetchMock);
+  expect((await fetchVideo(media, 720)).size).toBe(3);
+  expect(fetchMock.mock.calls[0][1]).toMatchObject({ credentials: 'omit', referrerPolicy: 'no-referrer' });
+});
 
 describe('source rendition selection', () => {
   it('selects portrait 720p rather than the original 1080p metadata dimensions', () => expect(selectVideoFormat(media, 720).url).toContain('/720x1280/'));

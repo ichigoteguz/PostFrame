@@ -53,7 +53,8 @@ export async function fetchVideo(media: PostMedia, quality: 720 | 1080, signal?:
   const url = new URL(format.url, location.href);
   if (url.protocol !== 'https:' || !/(^|\.)twimg\.com$/.test(url.hostname)) throw new Error('The post provider returned an unsupported video source.');
   let response: Response;
-  try { response = await fetch(url, { signal, credentials: 'omit' }); }
+  // X's media CDN rejects some non-X referrers even when its CORS policy permits the origin.
+  try { response = await fetch(url, { signal, credentials: 'omit', referrerPolicy: 'no-referrer' }); }
   catch (error) {
     if (signal?.aborted) throw new DOMException('Export canceled.', 'AbortError');
     throw new Error('The video could not be downloaded from X. Its media server may be unavailable or blocking browser access.');
