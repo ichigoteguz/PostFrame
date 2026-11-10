@@ -138,7 +138,7 @@ function normalizeMedia(value: unknown, postId: string, index: number): PostMedi
   const type = rawType === 'photo' ? 'photo' : rawType === 'gif' || rawType === 'animated_gif' ? 'gif' : rawType === 'video' ? 'video' : undefined;
   if (!type) return undefined;
   const url = safeMediaUrl(media.url);
-  if (!url) throw new Error('X returned a media address that PostFrame cannot safely load.');
+  if (!url) throw new Error('X returned a media address that XFrame Downloader cannot safely load.');
   const thumbnail = safeMediaUrl(media.thumbnail_url) || (type === 'photo' ? url : '');
   if (!thumbnail) throw new Error('The video preview is unavailable. Try this post again later.');
   const formats: MediaFormat[] = array(media.formats ?? media.variants).flatMap(item => {
@@ -196,7 +196,7 @@ async function timedRequest<T>(url: string, signal: AbortSignal | undefined, rea
 }
 
 function providerError(code: number): Error {
-  if (code === 401 || code === 403) return new Error('This post is private or restricted. PostFrame can only load publicly available posts.');
+  if (code === 401 || code === 403) return new Error('This post is private or restricted. XFrame Downloader can only load publicly available posts.');
   if (code === 404) return new Error('This post could not be found. It may have been deleted or made private.');
   if (code === 429) return new Error('The post service is busy. Wait a moment before trying again.');
   if (code === 400) return new Error('The post service could not read this link. Check the post URL and try again.');

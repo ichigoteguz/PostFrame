@@ -37,7 +37,7 @@ export async function createBenchmarkSource(durationSeconds = 120, options: Benc
           const gradient = ctx.createLinearGradient(0, 0, 1280, 720);
           gradient.addColorStop(0, '#183c39'); gradient.addColorStop(1, '#395238');
           ctx.fillStyle = gradient; ctx.fillRect(0, 0, 1280, 720);
-          ctx.fillStyle = '#d6f675'; ctx.font = '700 38px sans-serif'; ctx.fillText('POSTFRAME · VIDEO TEST', 70, 90);
+          ctx.fillStyle = '#d6f675'; ctx.font = '700 38px sans-serif'; ctx.fillText('XFRAME DOWNLOADER · VIDEO TEST', 70, 90);
           ctx.fillStyle = '#fff'; ctx.font = '700 116px monospace'; ctx.fillText(`${Math.floor(t / 60).toString().padStart(2, '0')}:${(t % 60).toFixed(2).padStart(5, '0')}`, 65, 315);
           ctx.font = '30px sans-serif'; ctx.fillStyle = '#c7dbce'; ctx.fillText(`${width} × ${height}  /  H.264  /  30 fps`, 70, 385);
           ctx.fillText(withAudio ? '440 Hz audio · one pulse each second' : 'Silent source · no audio track', 70, 435);

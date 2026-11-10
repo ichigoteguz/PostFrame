@@ -1,6 +1,6 @@
 # Third-party notices
 
-PostFrame uses the following browser dependencies. Their original licenses and copyright notices apply.
+XFrame Downloader uses the following browser dependencies. Their original licenses and copyright notices apply.
 
 | Dependency | License | Source |
 | --- | --- | --- |

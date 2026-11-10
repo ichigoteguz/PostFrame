@@ -1,5 +1,8 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { ArrowDownToLine, ArrowRight, Check, CircleHelp, Clapperboard, Crop, ExternalLink, Film, Frame, Github, Image as ImageIcon, Link2, LoaderCircle, Maximize, Moon, RotateCcw, ShieldCheck, Sun, X } from 'lucide-react';
+import { ArrowDownToLine, ArrowRight, Check, CircleHelp, Clapperboard, Crop, ExternalLink, Film, Github, Image as ImageIcon, Link2, LoaderCircle, Maximize, Moon, RotateCcw, ShieldCheck, Sun, X } from 'lucide-react';
+import { Brand, BrandMark } from './Brand';
+import { useSiteTheme } from './siteTheme';
+import type { SiteTheme } from './siteTheme';
 import { DEFAULT_SETTINGS, LIMITS } from './types';
 import type { Background, ExportSettings, MediaSelection, Post } from './types';
 import { DEMO_POST } from './demo';
@@ -9,10 +12,10 @@ import { captureFrame, getFrameDimensions } from './render';
 import { exportVideo, fetchVideo, inspectVideo } from './video';
 import type { VideoInfo } from './video';
 
-const STORAGE_KEY = 'postframe.settings.v1';
+const STORAGE_KEY = 'xframe-downloader.settings.v1';
 function storedSettings(): ExportSettings {
   try {
-    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || localStorage.getItem('postframe.settings.v1') || '{}');
     const allowed: Record<keyof ExportSettings, readonly unknown[]> = { theme: ['light', 'dim', 'dark'], background: Object.keys(BACKGROUNDS), padding: ['s', 'm', 'l'], aspect: ['auto', '1:1', '4:5', '16:9', '9:16'], format: ['png', 'jpg'], scale: [2, 3, 4], videoQuality: [720, 1080] };
     return Object.fromEntries(Object.entries(DEFAULT_SETTINGS).map(([key, value]) => [key, allowed[key as keyof ExportSettings].includes(stored[key]) ? stored[key] : value])) as unknown as ExportSettings;
   } catch { return DEFAULT_SETTINGS; }
@@ -40,6 +43,7 @@ function Preview({ post, settings, selection, demo, videoUrl }: { post: Post; se
   return <div className="preview-stage" ref={outerRef}><div className="preview-scaled-space" style={{ width: bounds.width * bounds.scale, height: bounds.height * bounds.scale }}><div className="preview-scaled-frame" style={{ transform: `scale(${bounds.scale})` }}><PostFrameView ref={frameRef} post={post} settings={settings} selection={selection} videoUrl={!demo && media?.type !== 'photo' ? videoUrl : undefined}/></div></div></div>;
 }
 export default function App() {
+  const [siteTheme, setSiteTheme] = useSiteTheme();
   const [post, setPost] = useState<Post>(DEMO_POST);
   const [demo, setDemo] = useState(true);
   const [url, setUrl] = useState('');
@@ -124,14 +128,14 @@ export default function App() {
         const frame = await captureFrame(exportRef.current, settings); blob = frame.blob;
       }
       if (controller.signal.aborted) return;
-      downloadBlob(blob, `postframe-${post.author.handle}-${post.id}${selection ? `-${selection.mediaId}` : ''}.${videoMode ? 'mp4' : settings.format}`);
+      downloadBlob(blob, `xframe-downloader-${post.author.handle}-${post.id}${selection ? `-${selection.mediaId}` : ''}.${videoMode ? 'mp4' : settings.format}`);
       setNotice(`${videoMode ? 'Your framed video' : 'Your image'} is ready. Download started.`);
     } catch (e) { if (!controller.signal.aborted) setError(e instanceof Error ? e.message : 'Export failed. Try a smaller layout or lower quality.'); }
     finally { if (taskRef.current === controller) { taskRef.current = null; setPhase('idle'); } }
   }
   function cancel() { taskRef.current?.abort(); setNotice('Canceled. You can start another export.'); }
   return <div className="app-shell">
-    <header className="site-header"><a className="brand" href={import.meta.env.BASE_URL} aria-label="PostFrame home"><span className="brand-mark"><Frame size={23} strokeWidth={2.3}/><i/></span><span>PostFrame<span className="brand-dot">.</span></span></a><nav aria-label="Main navigation"><button className="nav-help" onClick={() => setHelp(value => !value)}><CircleHelp size={15}/>How it works</button><a href="https://github.com/ichigoteguz/PostFrame" target="_blank" rel="noreferrer"><Github size={17}/><span>View on GitHub</span><ExternalLink size={12}/></a></nav></header>
+    <header className="site-header"><Brand/><nav aria-label="Main navigation"><label className="site-theme-control">{siteTheme === 'dark' ? <Moon size={16}/> : <Sun size={16}/>}<span className="sr-only">Site theme</span><select aria-label="Site theme" value={siteTheme} onChange={event => setSiteTheme(event.target.value as SiteTheme)}><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label><button className="nav-help" onClick={() => setHelp(value => !value)}><CircleHelp size={15}/>How it works</button><a href="https://github.com/ichigoteguz/PostFrame" target="_blank" rel="noreferrer"><Github size={17}/><span>View on GitHub</span><ExternalLink size={12}/></a></nav></header>
     <main>
       <section className="intro"><div className="eyebrow"><span/><span>THE POST. THE CONTEXT. THE WHOLE PICTURE.</span></div><h1>Keep the <span>whole post.</span></h1><p className="intro-description">For that one friend who doesn't want to create a Twitter account, so sharing memes becomes more difficult than it has to be.</p><div className="format-pills"><span><ImageIcon size={14}/>Images</span><i>+</i><span><Film size={14}/>Framed videos</span><span className="private-pill"><ShieldCheck size={13}/>Made in your browser</span></div>
       <form className="url-form" onSubmit={load}><Link2 size={19}/><label className="sr-only" htmlFor="post-url">X or Twitter post URL</label><input id="post-url" type="url" value={url} onChange={event => setUrl(event.target.value)} placeholder="Paste an X / Twitter post link…" required disabled={busy} autoComplete="off" spellCheck={false}/><button type="submit" disabled={busy || !url.trim()}>{phase === 'loading' ? <LoaderCircle size={17} className="spin"/> : null}<span>{phase === 'loading' ? 'Loading…' : 'Load post'}</span>{phase !== 'loading' && <ArrowRight size={17}/>}</button></form>
@@ -157,7 +161,7 @@ export default function App() {
       <section className="download-bar" aria-label="Download export"><div className="export-summary"><span className="export-icon">{videoMode ? <Film size={20}/> : <ImageIcon size={20}/>}</span><div><b>{videoMode ? 'A video worth keeping in context.' : 'A post worth keeping.'}</b><span>{videoMode ? `MP4 · ${settings.videoQuality}p media · Audio preserved` : `${settings.format.toUpperCase()} · ${settings.scale}× resolution`}{dimensions.length < 35 ? ` · ${dimensions}` : ''}</span></div></div><div className="download-actions">{busy && <button className="cancel-button" onClick={cancel}>Cancel</button>}<button className="download-button" onClick={save} disabled={busy || (videoMode && !readyVideo)}>{busy || (videoMode && videoCheck === 'loading') ? <LoaderCircle className="spin" size={18}/> : <ArrowDownToLine size={18}/>}<span>{phase === 'loading' ? 'Loading post…' : phase === 'preparing' ? 'Preparing…' : phase === 'exporting' ? `Exporting ${Math.round(progress * 100)}%` : videoMode && videoCheck === 'loading' ? 'Checking video…' : `Download ${videoMode ? 'video' : 'image'}`}</span>{!busy && <span className="download-extension">{videoMode ? '.mp4' : `.${settings.format}`}</span>}</button></div>{phase === 'exporting' && <div className="export-progress" role="progressbar" aria-label="Video export progress" aria-valuenow={Math.round(progress * 100)} aria-valuemin={0} aria-valuemax={100}><span style={{ width: `${progress * 100}%` }}/></div>}</section>
       <div className="status-area" aria-live="polite">{error && <div className="status-message error" role="alert"><CircleHelp size={17}/><span>{error}</span><button onClick={() => setError('')} aria-label="Dismiss error"><X size={15}/></button></div>}{notice && <div className="status-message success"><Check size={17}/>{notice}</div>}{!error && !notice && demo && videoMode && <p>Paste a post link to export its video. You can try an image download with this sample.</p>}{!error && !notice && !demo && videoMode && !browserSupportsVideo && <p>Video export needs desktop Chrome or Edge with H.264 support. Image export is still available.</p>}{!error && dimensions.length >= 35 && <p className="dimension-warning">{dimensions}</p>}</div>
       <div className="features-row"><div><span className="feature-number">01</span><b>Paste a post</b><span>Bring the link. We’ll bring the context.</span></div><div><span className="feature-number">02</span><b>Find your frame</b><span>Your theme, your background, your style.</span></div><div><span className="feature-number">03</span><b>Keep it moving</b><span>Download an image or a framed video.</span></div></div>
-    </main><footer className="site-footer"><div className="footer-brand"><Frame size={15}/>PostFrame<span>Keep the whole post.</span></div><span>Built for sharing, with context.</span><a href="https://docs.fxembed.com/api/introduction/" target="_blank" rel="noreferrer">Post data by FxTwitter<ArrowRight size={12}/></a></footer>
+    </main><footer className="site-footer"><div className="footer-brand"><BrandMark/>XFrame Downloader<span>Keep the whole post.</span></div><span>Built for sharing, with context.</span><a href="https://docs.fxembed.com/api/introduction/" target="_blank" rel="noreferrer">Post data by FxTwitter<ArrowRight size={12}/></a></footer>
     <p className="dedication">For Marcy, with love</p>
     <div className="export-offscreen" aria-hidden="true"><PostFrameView ref={exportRef} post={post} settings={settings} selection={selection} blankVideo={videoMode}/></div>
   </div>;
