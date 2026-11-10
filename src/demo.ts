@@ -1,0 +1,13 @@
+import type { Post } from './types';
+
+const svg = (markup: string) => `data:image/svg+xml,${encodeURIComponent(markup)}`;
+const avatar = svg('<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96"><defs><linearGradient id="a" x2="1" y2="1"><stop stop-color="#d9efab"/><stop offset="1" stop-color="#7a927c"/></linearGradient></defs><rect width="96" height="96" rx="48" fill="url(#a)"/><circle cx="48" cy="36" r="17" fill="#303b35"/><path d="M13 96c3-26 15-39 35-39s32 13 35 39" fill="#303b35"/><path d="m37 35 4-3m14 0 4 3" stroke="#d9efab" stroke-width="2" stroke-linecap="round"/></svg>');
+const poster = svg(`<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720"><defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#5d8194"/><stop offset=".7" stop-color="#c2cfbf"/><stop offset="1" stop-color="#f0d8a0"/></linearGradient><linearGradient id="hill" x2="0" y2="1"><stop stop-color="#384d4c"/><stop offset="1" stop-color="#1b3032"/></linearGradient><linearGradient id="lake" x2="1" y2="1"><stop stop-color="#99bab3"/><stop offset="1" stop-color="#375f60"/></linearGradient></defs><rect width="1280" height="720" fill="url(#sky)"/><circle cx="932" cy="200" r="54" fill="#f8ebbb" opacity=".75"/><path d="M0 440 230 156 408 345 566 100 847 455 1035 235 1280 460V720H0" fill="#718b87"/><path d="m433 266 133-166 122 154-75-25-47-65-45 78-37-5zM165 236l65-80 94 100-66-22-28-39-30 45z" fill="#dee5d5"/><path d="M0 479 155 377 370 476 534 347 786 508 1020 390 1280 510V720H0" fill="url(#hill)"/><path d="M0 589c179-90 316-13 490-59 144-39 350-15 487 16 110 25 211 25 303 5v169H0" fill="url(#lake)"/><path d="M0 650c146-77 264-29 379-31 100-3 160-31 236-44 158-26 262 61 665 10v135H0" fill="#b5c8a7" opacity=".2"/><path d="M0 555v165h331l-70-75-87 6-45-64zM1280 543v177h-274l83-77 99 2 27-65z" fill="#233e38"/><g fill="#233e38"><path d="m73 401-52 188h104zm-5 53-62 174h127zM1180 392l-57 206h114zm8 55-64 187h127zM1225 480l-48 158h96z"/></g><text x="44" y="677" fill="#e5eeda" font-family="Arial,sans-serif" font-size="16" letter-spacing="4" opacity=".7">A MOMENT OUTSIDE</text></svg>`);
+
+/** Fictional, self-contained sample. All illustrations are original inline SVGs. */
+export const DEMO_POST: Post = {
+  id: 'demo', url: '', author: { name: 'Alex Morgan', handle: 'alexoutside', avatar, verified: true },
+  text: 'Some things deserve more than a screenshot.\n\nThe light, the sound, the whole little moment. Keep the post around it. 🌿',
+  facets: [], createdAt: '2026-11-09T14:42:00.000Z',
+  media: [{ id: 'demo-landscape', type: 'photo', url: poster, thumbnail: poster, width: 1280, height: 720, formats: [] }],
+};
