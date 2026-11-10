@@ -62,4 +62,3 @@ Run the dev server and open `/PostFrame/?benchmark`. The development-only harnes
 
 See [verification notes](docs/VERIFICATION.md) for measured results and remaining limitations. Dependency licenses and source links are listed in [third-party notices](THIRD_PARTY_NOTICES.md).
 
-For Marcy, with love
