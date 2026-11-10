@@ -42,9 +42,9 @@ Only public posts are supported. Deleted, protected, restricted, external-player
 
 ## Deployment
 
-The live app uses GitHub Pages' branch publishing from `gh-pages` at `/`. Build with `pnpm build` and publish the contents of `dist/` to that branch, including an empty `.nojekyll` file. `vite.config.ts` uses `/PostFrame/`; change `base` if the repository path changes. No runtime API tokens or build secrets are required. Worker and app assets are bundled and served from the same site.
+The GitHub Actions workflow tests and builds pushes and pull requests. Its deploy job intentionally runs only for a public repository, so private development does not publish the app. When release checks are complete, make the repository public, set Pages' source to GitHub Actions, and dispatch the workflow. `vite.config.ts` uses `/PostFrame/`; change `base` if the repository path changes. No runtime API tokens or build secrets are required. Worker and app assets are bundled and served from the same site.
 
-An optional test/build/deploy Actions workflow is supplied as `docs/github-actions-pages.yml`. To adopt it later, move it into `.github/workflows/pages.yml` using a credential with workflow-write permission and switch Pages' source to GitHub Actions. The initial deployment uses branch publishing because the available GitHub credential does not have the workflow scope.
+The repository is currently private and the app has not been publicly deployed. GitHub authentication was completed during setup; the actual workflow is in `.github/workflows/pages.yml`, with a reference copy under `docs/`.
 
 ## Architecture
 

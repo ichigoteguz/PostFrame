@@ -24,7 +24,18 @@ These measured timings describe a synthetic fixture on this computer, not genera
 ## Code checks
 
 - TypeScript and production Vite build passed.
-- 49 unit tests passed before final review refinements.
+- All 53 unit tests passed after review refinements, including H.264 source preference and CDN referrer handling.
 - Production dependency audit reported no known vulnerabilities.
+- GitHub Actions run `42729702135` passed its install, test, and production build job on commit `216dd004099a4697311cf9930fc1b7a165d74d94`. Public deployment was intentionally skipped because the repository is private.
 
-Real-post UI checks and deployed Pages smoke testing are pending before public release.
+## Real-post check
+
+Loaded the reference downloader's example public post, `1903302115721629989`, through the actual UI. Author, text, avatar, and portrait video loaded. Source inspection resolved the selected 720×1280 MP4 and displayed the exact complete export size of 810×1566; the provider's original dimensions were larger. Cached-Blob video preview was observed playing.
+
+This check found that X's CDN rejects a non-X Referer even while allowing our browser Origin. A direct comparison returned 206 without the referrer and 403 with the localhost referrer. The video fetch now explicitly uses `referrerPolicy: 'no-referrer'`; the same real post then downloaded into the browser's source cache successfully. A regression test covers that request policy.
+
+## Stopping checkpoint
+
+Stopped at the owner's request on November 9, 2026 Eastern. Core implementation, local build, 53 tests, the synthetic two-minute export, and private GitHub CI are complete. Repository remains private and Pages is not enabled.
+
+Next: finish the real-post MP4 download through the main UI, check real text/photo exports and appearance controls, then enable public repository/Pages and smoke-test deployed worker paths and live retrieval. Standalone Chrome and phone testing remain unverified. Do not repeat GitHub authentication unless credentials have expired.
