@@ -12,6 +12,12 @@ describe('post URL handling', () => {
 });
 
 describe('provider normalization', () => {
+  it('preserves note prose when a stale media facet points into the full note text', () => {
+    const text = 'We were reluctant to once again set up our cameras up for yet another “No Show”.';
+    const start = text.indexOf('cameras');
+    const result = normalizePost(rawPost({ is_note_tweet: true, text, raw_text: { text, display_text_range: [0, text.length], facets: [{ type: 'media', indices: [start, start + 23], original: 'https://t.co/staleMedia', replacement: 'https://x.com/user/status/1/photo/1' }] } }));
+    expect(result.text).toBe(text);
+  });
   it('preserves IDs and orders media.all without duplicating photos/videos', () => {
     const media = [photo('1'), { id: '2', type: 'video', url: 'https://video.twimg.com/a/720x1280/b.mp4', thumbnail_url: 'https://pbs.twimg.com/2.jpg', width: 1080, height: 1920, duration: 12.306, formats: [{ url: 'https://video.twimg.com/a/720x1280/b.mp4', bitrate: 2176000, container: 'mp4', codec: 'h264' }, { url: 'https://video.twimg.com/b.m3u8', container: 'm3u8' }] }, photo('3'), photo('4')];
     const post = normalizePost(rawPost({ media: { all: media, photos: [media[0], media[2], media[3]], videos: [media[1]] } }));

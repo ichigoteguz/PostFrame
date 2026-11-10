@@ -2,6 +2,10 @@
 
 Keep the whole post. Export public X/Twitter posts as images, or download a video playing inside its original post frame.
 
+For that one friend who doesn't want to create a Twitter account, so sharing memes becomes more difficult than it has to be.
+
+Developed utilizing Codex.
+
 PostFrame is a static, browser-based app designed for GitHub Pages. Post data comes from [FxEmbed's public FxTwitter API](https://docs.fxembed.com/api/introduction/); media comes from X's media CDN. Files are composed on your device. There are no PostFrame accounts, backend, public download gallery, or stored post history. Loading a post necessarily sends its ID to FxTwitter and retrieves its assets from X.
 
 ## Features
@@ -55,3 +59,5 @@ The provider adapter normalizes FxTwitter v2 into application-owned types. React
 Run the dev server and open `/PostFrame/?benchmark`. The development-only harness generates a synthetic H.264/AAC source, captures a dark frame plus quote, exports an MP4, verifies duration/audio/dimensions, and extracts first/middle/final playback frames. Local artifacts are saved under ignored `.qa/` by a dev-server-only endpoint. The harness and artifact endpoint are absent from the production app.
 
 See [verification notes](docs/VERIFICATION.md) for measured results and remaining limitations. Dependency licenses and source links are listed in [third-party notices](THIRD_PARTY_NOTICES.md).
+
+For Marcy, with love

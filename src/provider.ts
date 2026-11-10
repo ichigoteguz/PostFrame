@@ -77,6 +77,13 @@ function normalizeText(status: Json): Pick<Post, 'text' | 'facets'> {
     const [start, end] = range;
     if (start < viewStart || end > viewEnd) continue;
     const kind = string(facet.type);
+    // Note posts can retain media facets from the shorter original post. Their
+    // stale offsets may point into ordinary prose in the full note text.
+    if (kind === 'media' || kind === 'url') {
+      const span = source.slice(start, end);
+      const original = string(facet.original);
+      if (!/^https?:\/\/\S+$/.test(span) || (original.startsWith('http') && span !== original)) continue;
+    }
     const url = safeLink(facet.replacement);
     let quoteLink = false;
     if (kind === 'url' && quoteId && url) {

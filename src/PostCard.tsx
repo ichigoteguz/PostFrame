@@ -1,4 +1,4 @@
-import { forwardRef, useLayoutEffect, useRef, useState } from 'react';
+import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { BadgeCheck, Play } from 'lucide-react';
 import type { Background, ExportSettings, MediaSelection, Post, PostMedia } from './types';
 
@@ -45,6 +45,7 @@ function dateLabel(value: string) {
 interface CardProps { post: Post; selection?: MediaSelection; blankVideo?: boolean; videoUrl?: string; quote?: boolean; depth?: number }
 function Card({ post, selection, blankVideo = false, videoUrl, quote = false, depth = 0 }: CardProps) {
   const [playing, setPlaying] = useState(false);
+  useEffect(() => setPlaying(false), [post.id, selection?.postId, selection?.mediaId, videoUrl]);
   const items = selection ? (post.id === selection.postId ? post.media.filter(item => item.id === selection.mediaId) : []) : post.media;
   return <article className={`post-card${quote ? ' quoted-card' : ''}`}>
     <header className="post-author"><img className="post-avatar" src={post.author.avatar} alt=""/><div className="post-author-label"><div className="post-name">{post.author.name}{post.author.verified && <BadgeCheck className="verified-badge" size={19} aria-label="Verified"/>}</div><div className="post-handle">@{post.author.handle.replace(/^@/, '')}</div></div>{!quote && <XMark/>}</header>
