@@ -40,3 +40,13 @@ This check found that X's CDN rejects a non-X Referer even while allowing our br
 Stopped at the owner's request on November 9, 2026 Eastern. Core implementation, local build, 53 tests, the synthetic two-minute export, and private GitHub CI are complete. Repository remains private and Pages is not enabled.
 
 Next: finish the real-post MP4 download through the main UI, check real text/photo exports and appearance controls, then enable public repository/Pages and smoke-test deployed worker paths and live retrieval. Standalone Chrome and phone testing remain unverified. Do not repeat GitHub authentication unless credentials have expired.
+
+## Resumed release validation
+
+On November 9, 2026 Eastern, the owner resumed work and requested the personal subtitle, bottom dedication, and Codex credit. All three are implemented; Codex is credited in the README, repository description, and private GitHub Projects entry.
+
+- The actual xtoimage sample post, `1856142448721793197`, exported through the main UI as a 6,555,294-byte H.264 MP4 at 1194×1376 for its full 46.5 seconds. Its original selected source is silent (1062×720), and the output correctly remains silent.
+- Don Pettit's photo post `1844748089560596542` exported as a light-theme PNG at 4×, 2400×4592. The long text and photo were visually inspected without clipping. This test exposed a stale FxEmbed media facet that pointed into full-note prose; the adapter now verifies the original URL span before suppressing a media link. Live normalization confirms all original note text is preserved, with a regression test added.
+- The text-only post `20` exported as a Dim-theme JPEG with Sunset background, medium padding, 4:5 ratio, and 3× scale at 2112×2640.
+- All 54 tests, TypeScript, and the production build pass. Private CI also passed the exact feature commit `44c908a` (run `42757674264`).
+- The repository is now public and GitHub Pages uses the Actions workflow. Deployed URL: https://ichigoteguz.github.io/PostFrame/ . Deployment and live smoke-test results follow below.

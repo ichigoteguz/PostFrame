@@ -6,6 +6,8 @@ For that one friend who doesn't want to create a Twitter account, so sharing mem
 
 Developed utilizing Codex.
 
+[Open PostFrame](https://ichigoteguz.github.io/PostFrame/)
+
 PostFrame is a static, browser-based app designed for GitHub Pages. Post data comes from [FxEmbed's public FxTwitter API](https://docs.fxembed.com/api/introduction/); media comes from X's media CDN. Files are composed on your device. There are no PostFrame accounts, backend, public download gallery, or stored post history. Loading a post necessarily sends its ID to FxTwitter and retrieves its assets from X.
 
 ## Features
@@ -48,7 +50,7 @@ Only public posts are supported. Deleted, protected, restricted, external-player
 
 The GitHub Actions workflow tests and builds pushes and pull requests. Its deploy job intentionally runs only for a public repository, so private development does not publish the app. When release checks are complete, make the repository public, set Pages' source to GitHub Actions, and dispatch the workflow. `vite.config.ts` uses `/PostFrame/`; change `base` if the repository path changes. No runtime API tokens or build secrets are required. Worker and app assets are bundled and served from the same site.
 
-The repository is currently private and the app has not been publicly deployed. GitHub authentication was completed during setup; the actual workflow is in `.github/workflows/pages.yml`, with a reference copy under `docs/`.
+The repository is public and the app is hosted on GitHub Pages. The actual workflow is in `.github/workflows/pages.yml`, with a reference copy under `docs/`.
 
 ## Architecture
 
