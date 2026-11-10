@@ -27,6 +27,7 @@ These measured timings describe a synthetic fixture on this computer, not genera
 - All 53 unit tests passed after review refinements, including H.264 source preference and CDN referrer handling.
 - Production dependency audit reported no known vulnerabilities.
 - GitHub Actions run `42729702135` passed its install, test, and production build job on commit `216dd004099a4697311cf9930fc1b7a165d74d94`. Public deployment was intentionally skipped because the repository is private.
+- The documentation checkpoint also passed CI (`42729880571`, commit `198e5a54456295a1c955505c385c2ece64088609`). Windows native file-watcher EBUSY crashes were observed when large QA artifacts and a workflow file were written; QA/docs/workflow directories are now ignored and Windows development uses polling. This affects the local dev server only.
 
 ## Real-post check
 

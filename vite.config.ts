@@ -9,4 +9,4 @@ export default defineConfig({ plugins: [react(), {
     if(req.method!=='POST'||!match)return next();
     try {const chunks:Buffer[]=[];let size=0;for await(const chunk of req){size+=chunk.length;if(size>150*1024*1024)throw new Error('Too large');chunks.push(chunk);}await mkdir('.qa',{recursive:true});await writeFile(resolve('.qa',match[1]),Buffer.concat(chunks));res.statusCode=204;res.end();}catch{res.statusCode=500;res.end('Could not save QA artifact');}
   }); }
-}], base: '/PostFrame/', server: { watch: { ignored: ['**/.qa/**'] } }, worker: { format: 'es' }, build: { target: 'es2022' } });
+}], base: '/PostFrame/', server: { watch: { ignored: ['**/.qa/**', '**/.github/**', '**/docs/**'], usePolling: process.platform === 'win32', interval: 300 } }, worker: { format: 'es' }, build: { target: 'es2022' } });
