@@ -50,3 +50,11 @@ On November 9, 2026 Eastern, the owner resumed work and requested the personal s
 - The text-only post `20` exported as a Dim-theme JPEG with Sunset background, medium padding, 4:5 ratio, and 3× scale at 2112×2640.
 - All 54 tests, TypeScript, and the production build pass. Private CI also passed the exact feature commit `44c908a` (run `42757674264`).
 - The repository is now public and GitHub Pages uses the Actions workflow. Deployed URL: https://ichigoteguz.github.io/PostFrame/ . Deployment and live smoke-test results follow below.
+
+## Public deployment smoke test
+
+GitHub Actions deployment `42757919752` succeeded, followed by successful build/deploy run `42758132776` for the release documentation commit. The HTTPS page, generated JavaScript, CSS, and video worker all returned HTTP 200 at their `/PostFrame/` paths.
+
+The live site was opened in Edge. The exact requested subtitle and bottom dedication were verified. Loading the Ozgur Ozer reference post from the deployed origin succeeded, and the deployed worker exported/downloaded the complete 46.5-second MP4 (6,559,030 bytes). The output is H.264 at 1194×1376 and correctly silent, matching the source's lack of an audio track. This verifies the production worker, post-provider CORS, direct media retrieval, frame capture, and download path together.
+
+Release scope is complete. Remaining compatibility limits are the documented desktop-first video support, two-minute/100 MiB input guardrails, and unverified standalone Chrome/mobile coverage. The app continues to depend on FxTwitter and X CDN availability. The private project board records the public app, repository, Codex attribution, and validation results.
