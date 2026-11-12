@@ -20,10 +20,10 @@ describe('site theme preferences', () => {
   });
 
   it.each([
-    ['system', true, 'dark', '#0C1C23'],
+    ['system', true, 'dark', '#0B111B'],
     ['system', false, 'light', '#F7F8F5'],
     ['light', true, 'light', '#F7F8F5'],
-    ['dark', false, 'dark', '#0C1C23'],
+    ['dark', false, 'dark', '#0B111B'],
   ] as const)('resolves %s with system dark=%s to %s', (choice, systemDark, expected, chromeColor) => {
     const dataset: Record<string, string> = {};
     const setAttribute = vi.fn();

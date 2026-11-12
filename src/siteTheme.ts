@@ -12,7 +12,7 @@ export function readSiteTheme(): SiteTheme {
 export function applySiteTheme(preference: SiteTheme) {
   const theme = preference === 'system' ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : preference;
   document.documentElement.dataset.siteTheme = theme;
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#0C1C23' : '#F7F8F5');
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#0B111B' : '#F7F8F5');
 }
 export function useSiteTheme() {
   const [theme, setTheme] = useState<SiteTheme>(readSiteTheme);

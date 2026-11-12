@@ -64,3 +64,16 @@ Release scope is complete. Remaining compatibility limits are the documented des
 The owner approved the XFrame Downloader logo, rebrand, and site themes. The rebrand commit `7da44dd` passed 64 tests, TypeScript, and the production build; GitHub Actions build and deploy run [42911635431](https://github.com/ichigoteguz/PostFrame/actions/runs/42911635431) succeeded. Live checks verified the XFrame Downloader title, light/dark logo assets, and site-theme selector. Local desktop/mobile checks verified both interface themes, persisted Dark after reload, and a successful sample PNG export. Site and export themes remain independent.
 
 Version 1.0.0 is the first stable release, with the supported scope and compatibility limits recorded in [release notes](RELEASE_NOTES.md). The page dedication remains; it is absent from the README. The repository and deployed path remain PostFrame.
+
+## Precision Studio / Night Signal — November 11, 2026
+
+The owner selected RFAB concept A for the light site theme and B for the dark site theme. The local implementation uses dedicated text-free generated frame artwork, an open ivory light composition, and an inset dark console with separate matte panels, technical framing, and cyan actions. The SVG logo, complete export controls, dedication, and exact Codex credit are retained.
+
+- All 64 existing tests pass. TypeScript and the production build pass. The two new production artwork files are included under the existing `/PostFrame/art/` base path; no service credential is needed by the app.
+- Browser checks in the in-app browser verified both treatments, explicit Light and Dark persistence after reload, and independent Dark export styling. A local iframe fixture checked 375 px mobile and nominal 1280 px desktop layouts (1265 px client area after scrollbar), with no horizontal overflow in either theme. The mobile layout puts the preview before the controls. Both artwork files loaded successfully.
+- A sample PNG exported under Light and another under Dark have the identical SHA-256 `0CAE0AE968A405C9728A3610867CAE6A3C1D8AE9FE87F2DFFB79A9A317DBC2C2`. This verifies that site styling did not change this export. The self-contained export CSS block is preserved byte-for-byte from HEAD.
+- The existing three-second browser smoke test passed: 1440 × 1746 H.264 MP4 at 3 seconds with audio; all 141 source AAC packets preserved exactly; silent portrait retained no audio; cancellation and repeat export succeeded; PNG and JPEG MIME checks passed. The longer acceptance test was not repeated for this site-only visual change.
+- System-theme resolution is covered by the existing unit tests; the existing live media-query listener is retained. A live OS theme change was not simulated during this review.
+- Two additional RFAB artwork jobs completed at 3,360 tokens each, totaling 6,720 tokens. Account and job responses remain under ignored `.qa/rfab/`; public asset provenance is in the theme art manifest.
+
+Review screenshots are retained locally in `.qa/precision-studio-desktop.jpg` and `.qa/night-signal-desktop.jpg`. The owner approved the implementation after local review and requested stopping the preview and publishing the changes to GitHub. The verification above was completed locally before publishing; the Pages workflow validates and deploys pushes to `main`.

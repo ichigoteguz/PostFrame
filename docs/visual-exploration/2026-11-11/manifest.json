@@ -1,0 +1,68 @@
+{
+  "project": "XFrame Downloader",
+  "date": "2026-11-11",
+  "timezone": "America/New_York",
+  "purpose": "Unapproved visual direction concepts",
+  "developmentCredit": "Developed with OpenAI Codex",
+  "service": "Reality Fabricator",
+  "qualityOverride": null,
+  "resolutionOverride": null,
+  "referenceUploads": false,
+  "totalTokensCharged": 10080,
+  "samples": [
+    {
+      "id": "a-precision-studio",
+      "file": "a-precision-studio.jpg",
+      "sourceUrl": "https://rfab-media.s3.us-east-1.amazonaws.com/images/generated/img_1794450553676_967dd8d4_0.jpg",
+      "model": "replicate:google/nano-banana-2.1",
+      "provider": "replicate",
+      "seed": null,
+      "jobId": "455c865e-6d31-4170-a974-aa6c03fe6790",
+      "status": "completed",
+      "generationTimeSeconds": 21,
+      "tokensCharged": 3360,
+      "promptFile": "a-precision-studio-prompt.json",
+      "promptSha256": "9db3016953a49c0b8bff738ce9a6e82dbaddaaec8c11595a3a7652a5d2e0ae23",
+      "imageSha256": "b034e8884282004eb2f60752d95a73e7edd8076a161faf5bc112a6613aee740b",
+      "bytes": 99004
+    },
+    {
+      "id": "b-night-signal",
+      "file": "b-night-signal.jpg",
+      "sourceUrl": "https://rfab-media.s3.us-east-1.amazonaws.com/images/generated/img_1794450626817_d0d7462c_0.jpg",
+      "model": "replicate:google/nano-banana-2.1",
+      "provider": "replicate",
+      "seed": null,
+      "jobId": "4a2244db-1b16-4944-97c5-63f09619de17",
+      "status": "completed",
+      "generationTimeSeconds": 26,
+      "tokensCharged": 3360,
+      "promptFile": "b-night-signal-prompt.json",
+      "promptSha256": "2d45feb5840ca42be4901455d876b402e755228cf521894d17226e24e0d977e1",
+      "imageSha256": "891bcc6f27b623deb60757f64e9b76d20c439afebf178376eef814f245e19f08",
+      "bytes": 111850
+    },
+    {
+      "id": "c-paper-play",
+      "file": "c-paper-play.jpg",
+      "sourceUrl": "https://rfab-media.s3.us-east-1.amazonaws.com/images/generated/img_1794450624562_a6a55436_0.jpg",
+      "model": "replicate:google/nano-banana-2.1",
+      "provider": "replicate",
+      "seed": null,
+      "jobId": "b2061771-4e38-4d51-9b37-d8f4dc465fe7",
+      "status": "completed",
+      "generationTimeSeconds": 21,
+      "tokensCharged": 3360,
+      "promptFile": "c-paper-play-prompt.json",
+      "promptSha256": "3baaa61d7c44ee1b6f6dd28552db546a4a69506b424823887b4178f6fbf5b0b1",
+      "imageSha256": "f6caeb8bb2e75a09d7c60070369cc4777226672413ea33e66b3482d224c2d33a",
+      "bytes": 133653
+    }
+  ],
+  "notes": [
+    "Independent generations share a brief and subject, not identical photo pixels or author portraits.",
+    "Generated labels and controls are illustrative; preserve real application features in implementation.",
+    "No production design change was made.",
+    "No seed returned by the provider; exact regeneration is not guaranteed."
+  ]
+}

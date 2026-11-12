@@ -1,0 +1,43 @@
+{
+  "project": "XFrame Downloader",
+  "date": "2026-11-11",
+  "developmentCredit": "Developed with OpenAI Codex",
+  "selection": {
+    "light": "A - Precision Studio",
+    "dark": "B - Night Signal"
+  },
+  "totalTokensCharged": 6720,
+  "qualityOverride": null,
+  "resolutionOverride": null,
+  "referenceUploads": false,
+  "assets": [
+    {
+      "theme": "light",
+      "file": "public/art/precision-studio.jpg",
+      "prompt": "precision-art-prompt.json",
+      "sourceUrl": "https://rfab-media.s3.us-east-1.amazonaws.com/images/generated/img_1794451260001_60c6308e_0.jpg",
+      "model": "replicate:google/nano-banana-2.1",
+      "provider": "replicate",
+      "seed": null,
+      "jobId": "4baa5d68-e4d2-407f-9abc-0cd9a61c7c87",
+      "tokensCharged": 3360,
+      "sha256": "74b2ccf8d0b858533d3ef40ca8ad1c1d45b8bba1c955bcc7e8384b60c58bd87c",
+      "width": 1200,
+      "height": 896
+    },
+    {
+      "theme": "dark",
+      "file": "public/art/night-signal.jpg",
+      "prompt": "signal-art-prompt.json",
+      "sourceUrl": "https://rfab-media.s3.us-east-1.amazonaws.com/images/generated/img_1794451262885_4e61463e_0.jpg",
+      "model": "replicate:google/nano-banana-2.1",
+      "provider": "replicate",
+      "seed": null,
+      "jobId": "2e07c6c7-3a2f-485e-bf7e-79e5091991a8",
+      "tokensCharged": 3360,
+      "sha256": "1822cee2fb522943ced7d5b6bc7126208afc5075afb87d76e19286c3cffa415a",
+      "width": 1200,
+      "height": 896
+    }
+  ]
+}

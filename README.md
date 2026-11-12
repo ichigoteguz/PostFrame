@@ -6,7 +6,7 @@ Keep the whole post. Export public X/Twitter posts as images, or download a vide
 
 For that one friend who doesn't want to create a Twitter account, so sharing memes becomes more difficult than it has to be.
 
-Developed utilizing Codex.
+Developed with OpenAI Codex.
 
 [Open XFrame Downloader](https://ichigoteguz.github.io/PostFrame/)
 
@@ -18,7 +18,7 @@ The product is named XFrame Downloader; the repository and GitHub Pages path rem
 
 - Text, photos, quoted posts, and framed MP4 video with audio.
 - Select one video and give it the complete media area; other attachments are omitted from that export.
-- System, Light, and Dark site themes, remembered on this device and independent of the exported card.
+- System, Light (Precision Studio), and Dark (Night Signal) site themes, with distinct artwork and layouts, remembered on this device and independent of the exported card.
 - Light, Dim, and Dark cards; solid and gradient backgrounds; padding and aspect-ratio controls.
 - PNG and JPG images at 2×, 3×, or 4×; 720p Fast and 1080p video presets.
 - Live preview, exact output dimensions, progress, and cancellation.

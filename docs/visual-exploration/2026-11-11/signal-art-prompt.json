@@ -1,0 +1,9 @@
+{
+  "prompt": "XFrame Downloader project art direction: a friendly, thoughtfully designed browser tool that preserves a social post around an exported image or video. The brand metaphor is a frame, context, and a downward download gesture. Restrained, confident visual design. Original artwork only.\n\nGenerate the standalone decorative hero artwork for the approved Night Signal DARK identity, not an interface mockup. A dramatic but minimal cinematic product still life: one elegant thick translucent glass rectangular picture frame floating at an angle, a second faint glass frame offset behind it. A broad icy-cyan #63E6E2 diagonal beam of light passes from the upper right through the transparent frame toward the lower left, catching its polished edges. A small tactile amber #F4B95B downward download arrow floats to the lower right of the frame. Deep near-black navy #0B111B background fading to slate #172331 only where lit, restrained cyan reflections, tiny amber glints, realistic glass refraction, premium matte media-tool aesthetic. Object centered, generous clean margins, landscape 4:3 composition, all frame and arrow shapes remain well inside the canvas. The frame interior is empty clear glass. No words, letters, logos, UI, screenshots, labels, people, photos, extra icons, decorative particles or cyberpunk clutter. Beautiful precise dimensional materials and controlled theatrical light.",
+  "modelId": "replicate:google/nano-banana-2.1",
+  "width": 1024,
+  "height": 768,
+  "aspectRatio": "4:3",
+  "imageCount": 1,
+  "async": true
+}
